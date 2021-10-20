@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj": {}
+  },
+  "projects": {
+    "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj": {
+      "version": "6.5.0",
+      "restore": {
+        "projectUniqueName": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj",
+        "projectName": "AirCloudWPF",
+        "projectPath": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj",
+        "packagesPath": "C:\\Users\\isteyak.a\\.nuget\\packages\\",
+        "outputPath": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "configFilePaths": [
+          "C:\\Users\\isteyak.a\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net45"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net45": {
+            "targetAlias": "net45",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net45": {
+          "targetAlias": "net45",
+          "dependencies": {
+            "Microsoft.Xaml.Behaviors.Wpf": {
+              "target": "Package",
+              "version": "[1.1.19, )"
+            },
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[7.1.0.431, )"
+            },
+            "Unity": {
+              "target": "Package",
+              "version": "[5.8.11, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

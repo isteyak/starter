@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <Authors>Johnson Controls–Hitachi Air Conditioning</Authors>
+    <Company>Johnson Controls–Hitachi Air Conditioning</Company>
+    <PackageIcon>airCloudSelect.ico</PackageIcon>
+    <Copyright>Copyright © 2020 Johnson Controls–Hitachi Air Conditioning.</Copyright>
+    <AssemblyVersion>6.5.0.0</AssemblyVersion>
+    <Version>6.5.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+    <PackageReference Include="Prism.Wpf" Version="7.1.0.431" />
+    <PackageReference Include="Unity" Version="5.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Styles\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Styles\Buttons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Styles\Controls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Styles\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Include="airCloudSelect.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\SourceSansPro.ttf" />
+  </ItemGroup>
+
+</Project>

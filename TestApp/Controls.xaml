@@ -1,0 +1,383 @@
+﻿<UserControl
+    x:Class="TestApp.Controls"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ac="clr-namespace:AirCloudWPF;assembly=AirCloudWPF"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ac:BooleanToErrorBrushConverter
+            x:Key="ErrorBrushConverter"
+            DefaultBrush="{StaticResource ACPrimaryGrayBrush}"
+            ErrorColorBrush="{StaticResource ACPrimaryRedBrush}" />
+        <ac:StarWidthConverter x:Key="StarWidthConverter" />
+
+        <Style x:Key="ItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border
+                            x:Name="ItemBorder"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            IsHitTestVisible="True">
+                            <Grid
+                                Height="42"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15" />
+                                    <ColumnDefinition Width="Auto" MinWidth="90" />
+                                    <ColumnDefinition Width="Auto" MinWidth="50" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Margin="-5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="Black"
+                                    Text="{Binding UnitName}" />
+                                <TextBlock
+                                    Grid.Column="2"
+                                    Margin="-5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="Black"
+                                    Text="{Binding Model}" />
+                                <Button
+                                    x:Name="DeleteButton"
+                                    Grid.Column="3"
+                                    Width="15"
+                                    Height="15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="{StaticResource ACPrimaryGrayBrush}"
+                                    Content="{StaticResource ACDelete}"
+                                    Cursor="Hand"
+                                    Style="{StaticResource IconButtonStyle}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="Transparent" />
+                                <Setter TargetName="DeleteButton" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource ACGrayBrush6}" />
+                                <Setter TargetName="DeleteButton" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Padding="60,0">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                        <TextBlock Text="Primary Buttons" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Large"
+                            ac:ButtonExtensions.ButtonType="Primary"
+                            Content="Large Button"
+                            IsDefault="True" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Large"
+                            ac:ButtonExtensions.ButtonType="Primary"
+                            Content="Large Button"
+                            IsEnabled="False" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Medium"
+                            ac:ButtonExtensions.ButtonType="Primary"
+                            Content="Medium Button" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Small"
+                            ac:ButtonExtensions.ButtonType="Primary"
+                            Content="Small Button" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonType="OK"
+                            Content="OK" />
+
+                        <DatePicker
+                            Width="120"
+                            Height="35"
+                            Margin="0,5,0,0"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center" />
+
+                        <Slider
+                            Width="150"
+                            Height="30"
+                            Margin="0,5,0,0" />
+                    </StackPanel>
+                    <StackPanel
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Vertical">
+                        <TextBlock Text="Secondary Buttons" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Large"
+                            ac:ButtonExtensions.ButtonType="Secondary"
+                            Content="Large Button" />
+
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Large"
+                            ac:ButtonExtensions.ButtonType="Secondary"
+                            Content="Large Button"
+                            IsEnabled="False" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Medium"
+                            ac:ButtonExtensions.ButtonType="Secondary"
+                            Content="Medium Button" />
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Small"
+                            ac:ButtonExtensions.ButtonType="Secondary"
+                            Content="Small Button" />
+
+                        <Button
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Small"
+                            ac:ButtonExtensions.ButtonType="Secondary"
+                            Click="Button_Click" />
+
+                        <Button
+                            Width="75"
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Auto"
+                            ac:ButtonExtensions.ButtonText="Button"
+                            ac:ButtonExtensions.ButtonType="Primary"
+                            Background="Black"
+                            Content="{StaticResource ACDelete}"
+                            Foreground="{StaticResource ACPrimaryBlackTextBrush}"
+                            Style="{StaticResource TextIconButtonStyle}" />
+
+                        <Button
+                            Width="30"
+                            Margin="0,5,0,0"
+                            ac:ButtonExtensions.ButtonSize="Auto"
+                            ac:ButtonExtensions.ButtonType="Auto"
+                            Background="Black"
+                            Click="Button_Click_1"
+                            Content="{StaticResource ACPlus}"
+                            Style="{StaticResource TextIconButtonStyle}" />
+                    </StackPanel>
+                    <StackPanel
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Vertical">
+                        <TextBlock Text="Check Box, Radio Buttons" />
+                        <CheckBox
+                            Margin="0,5,0,0"
+                            Content="CheckBox"
+                            IsChecked="True" />
+                        <CheckBox
+                            Margin="0,5,0,0"
+                            Content="CheckBox"
+                            IsChecked="False" />
+
+                        <RadioButton
+                            Margin="0,5,0,0"
+                            Content="RadioButton"
+                            IsChecked="True" />
+
+                        <RadioButton
+                            Margin="0,5,0,0"
+                            Content="RadioButton"
+                            IsChecked="False" />
+
+                        <Button
+                            Width="90"
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="Text Button"
+                            Style="{StaticResource TextButtonStyle}" />
+
+                        <Button
+                            Width="150"
+                            Height="40"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            ac:ButtonExtensions.ButtonSize="Auto"
+                            ac:ButtonExtensions.ButtonType="Secondary"
+                            Content="Add Accessories" />
+
+                        <ListView
+                            x:Name="IduList"
+                            Width="Auto"
+                            Height="180"
+                            Margin="0,5,0,0"
+                            ac:GridExtensions.Header="IDUs"
+                            Background="White"
+                            IsSynchronizedWithCurrentItem="True"
+                            ItemContainerStyle="{StaticResource ItemStyle}"
+                            ItemsSource="{Binding Idus}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="15" Header="" />
+                                    <GridViewColumn Width="90" Header="UnitName" />
+                                    <GridViewColumn Width="100" Header="Model" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel
+                        x:Name="CustomStack"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox
+                                Width="100"
+                                Height="60"
+                                ac:ComboBoxExtensions.Header="ComboBox"
+                                ac:ComboBoxExtensions.HeaderForegroundBrush="{StaticResource ACPrimaryBlackTextBrush}"
+                                ac:ComboBoxExtensions.HeaderSize="12"
+                                IsEnabled="{Binding ElementName=Combo, Path=IsChecked}"
+                                SelectedIndex="1">
+                                <ComboBoxItem Content="T1" />
+                                <ComboBoxItem Content="T2" />
+                                <ComboBoxItem Content="T3" />
+                                <ComboBoxItem Content="T4" />
+                            </ComboBox>
+                            <CheckBox
+                                x:Name="Combo"
+                                Margin="5,0,0,0"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Bottom"
+                                Content="ComboState"
+                                IsChecked="True" />
+                        </StackPanel>
+
+                        <ac:AirCloudNumberBox
+                            x:Name="NumericSpinner"
+                            Height="60"
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Left"
+                            ErrorMessage="Hello"
+                            Header="Relative Humidity"
+                            HeaderSize="10"
+                            MaxValue="25"
+                            MinValue="0"
+                            Unit="%"
+                            Value="10" />
+
+                        <ac:AirCloudRibbon
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Stretch"
+                            Content="Information"
+                            IsActive="True"
+                            RibbonType="Information" />
+                        <ac:AirCloudRibbon
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Stretch"
+                            Content="Error"
+                            IsActive="True"
+                            RibbonType="Error" />
+                        <ac:AirCloudRibbon
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Stretch"
+                            Content="Warning"
+                            IsActive="True"
+                            RibbonType="Warning" />
+                        <ac:AirCloudRibbon
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Stretch"
+                            Content="Success"
+                            IsActive="True"
+                            RibbonType="Success" />
+
+                        <Expander
+                            HorizontalAlignment="Stretch"
+                            Background="White"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            ExpandDirection="Down"
+                            Header="Outdoor Details">
+                            <ListView
+                                x:Name="IduList1"
+                                Width="Auto"
+                                Height="180"
+                                Margin="0,5,0,0"
+                                ac:GridExtensions.Header="IDUs"
+                                Background="White"
+                                IsSynchronizedWithCurrentItem="True"
+                                ItemContainerStyle="{StaticResource ItemStyle}"
+                                ItemsSource="{Binding Idus}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="15" Header="" />
+                                        <GridViewColumn Width="90" Header="UnitName" />
+                                        <GridViewColumn Width="100" Header="Model" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Expander>
+
+                        <Menu Background="White">
+                            <MenuItem ac:ButtonExtensions.Icon="{StaticResource ACHelp}" Header="Hello" />
+                        </Menu>
+                    </StackPanel>
+                    <StackPanel Margin="5,0,0,0">
+                        <TextBlock Margin="0,0,0,10" Text="Timeline" />
+                        <!--  Use Direction, HeaderPath, DatePath, DetailsPath and ItemTemplate for more control  -->
+                        <ac:AirCloudTimeLine ItemsSource="{Binding Events}" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical">
+                    <TextBox
+                        Width="300"
+                        Height="60"
+                        ac:TextBoxExtensions.BoxSize="Medium"
+                        ac:TextBoxExtensions.Header="Fullname"
+                        ac:TextBoxExtensions.IsRequired="True"
+                        ac:TextBoxExtensions.PlaceholderText="Username"
+                        BorderBrush="{StaticResource ACGrayBrush5}"
+                        Style="{StaticResource TextBoxRevealStyle}" />
+
+                    <PasswordBox
+                        Width="300"
+                        Height="60"
+                        Margin="0,5,0,0"
+                        ac:TextBoxExtensions.BoxSize="Medium"
+                        ac:TextBoxExtensions.Header="Password"
+                        ac:TextBoxExtensions.IsRequired="True"
+                        ac:TextBoxExtensions.PlaceholderText="Password"
+                        BorderBrush="{StaticResource ACGrayBrush5}"
+                        Style="{StaticResource PasswordBoxRevealStyle}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Height="32"
+            Background="Gray" />
+    </Grid>
+</UserControl>

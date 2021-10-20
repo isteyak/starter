@@ -1,0 +1,1252 @@
+﻿<ac:AirCloudWindow
+    x:Class="TestApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ac="clr-namespace:AirCloudWPF;assembly=AirCloudWPF"
+    xmlns:acc ="clr-namespace:AirCloudWPF.Converters;assembly=AirCloudWPF"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:TestApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="AcWin"
+    Title="MainWindow"
+    Width="900"
+    Height="600"
+    ac:WindowExtensions.Brand="{StaticResource ACHitachiBrand}"
+    ac:WindowExtensions.BrandMargin="24,0,0,0"
+    ac:WindowExtensions.MenuVisibility="{Binding Path=IsChecked, ElementName=Switch}"
+    ac:WindowExtensions.ProjectName="{Binding ProjectName}"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ControlTemplate x:Key="Test">
+            <Grid
+                Height="Auto"
+                Margin="10,32,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center">
+                <Path
+                    x:Name="Container"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Data="{Binding Source={StaticResource ACToolTip}}"
+                    Fill="White"
+                    Stretch="Fill"
+                    Stroke="{StaticResource ACGrayBrush4}">
+                    <Path.Effect>
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            Opacity="0.5"
+                            ShadowDepth="4" />
+                    </Path.Effect>
+                </Path>
+                <TextBlock
+                    MaxWidth="250"
+                    Margin="8,16,4,4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Panel.ZIndex="2"
+                    FontSize="14"
+                    Foreground="{StaticResource ACPrimaryBlackTextBrush}"
+                    Text="Hello"
+                    TextWrapping="Wrap" />
+            </Grid>
+        </ControlTemplate>
+
+        <ac:BooleanToErrorBrushConverter
+            x:Key="ErrorBrushConverter"
+            DefaultBrush="{StaticResource ACPrimaryGrayBrush}"
+            ErrorColorBrush="{StaticResource ACPrimaryRedBrush}" />
+        <ac:StarWidthConverter x:Key="StarWidthConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <ac:BooleanToNotVisibilityConverter x:Key="BooleanToNotVisibilityConverter" />
+
+        <Style TargetType="{x:Type ac:AirCloudNumberBox}">
+            <Setter Property="Margin" Value="0,10,0,10" />
+        </Style>
+
+        <Style x:Key="ItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border
+                            x:Name="ItemBorder"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"
+                            IsHitTestVisible="True">
+                            <Grid
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15" />
+                                    <ColumnDefinition Width="Auto" MinWidth="90" />
+                                    <ColumnDefinition Width="Auto" MinWidth="50" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Margin="-5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="Black"
+                                    Text="{Binding UnitName}" />
+                                <TextBlock
+                                    Grid.Column="2"
+                                    Margin="-5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="Black"
+                                    Text="{Binding Model}" />
+                                <Button
+                                    x:Name="DeleteButton"
+                                    Grid.Column="3"
+                                    Width="15"
+                                    Height="15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="{StaticResource ACPrimaryGrayBrush}"
+                                    Content="{StaticResource ACDelete}"
+                                    Cursor="Hand"
+                                    Style="{StaticResource IconButtonStyle}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="Transparent" />
+                                <Setter TargetName="DeleteButton" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="{StaticResource ACGrayBrush6}" />
+                                <Setter TargetName="DeleteButton" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <ac:AirCloudWindow.Style>
+        <Style TargetType="{x:Type ac:AirCloudWindow}">
+            <Setter Property="ac:WindowExtensions.SideMenu">
+                <Setter.Value>
+                    <StackPanel
+                        Background="{StaticResource ACGrayBrush6}"
+                        Orientation="Horizontal"
+                        WindowChrome.IsHitTestVisibleInChrome="True">
+                        <StackPanel
+                            Width="40"
+                            Background="Transparent"
+                            Orientation="Vertical"
+                            Visibility="{Binding OpenMenu, Converter={StaticResource BooleanToNotVisibilityConverter}}">
+                            <ToggleButton
+                                x:Name="MenuButton"
+                                Margin="0,-10,0,-10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Background="Black"
+                                Content="{StaticResource ACHamburger}"
+                                IsChecked="{Binding OpenMenu}"
+                                Style="{StaticResource MenuButtonStyle}" />
+                            <RadioButton
+                                HorizontalAlignment="Left"
+                                Background="{StaticResource ACSystemDangerBrush}"
+                                Command="{Binding}"
+                                Content="{StaticResource ACHome}"
+                                GroupName="T"
+                                IsChecked="{Binding HomeChecked}"
+                                Style="{StaticResource MenuRadioButtonStyle}" />
+                            <RadioButton
+                                HorizontalAlignment="Left"
+                                Background="{StaticResource ACSystemDangerBrush}"
+                                Content="{StaticResource ACSettings}"
+                                GroupName="T"
+                                IsChecked="{Binding SettingsChecked}"
+                                Style="{StaticResource MenuRadioButtonStyle}" />
+                            <RadioButton
+                                HorizontalAlignment="Left"
+                                Background="{StaticResource ACSystemDangerBrush}"
+                                Content="{StaticResource ACTools}"
+                                GroupName="T"
+                                Style="{StaticResource MenuRadioButtonStyle}" />
+                            <RadioButton
+                                HorizontalAlignment="Left"
+                                ac:ButtonExtensions.HasUpdate="True"
+                                Background="{StaticResource ACSystemDangerBrush}"
+                                Content="{StaticResource ACHelp}"
+                                GroupName="T"
+                                Style="{StaticResource MenuRadioButtonStyle}" />
+                        </StackPanel>
+                        <StackPanel
+                            Width="250"
+                            Margin="0,5,0,0"
+                            Visibility="{Binding OpenMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid Background="Transparent">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding Path=CloseMenuCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Text="airCloud Select" />
+                                <Button
+                                    Width="15"
+                                    Height="20"
+                                    Margin="0,0,10,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Background="{StaticResource ACPrimaryGraphiteBrush}"
+                                    Command="{Binding CloseMenuCommand}"
+                                    Content="{StaticResource ACBack}"
+                                    Style="{StaticResource IconButtonStyle}" />
+                            </Grid>
+
+                            <RadioButton
+                                Width="250"
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonText="Home"
+                                Content="{StaticResource ACHome}"
+                                IsChecked="{Binding HomeChecked, Mode=TwoWay}"
+                                Style="{StaticResource ExpanderMenuButtonStyle}" />
+                            <RadioButton
+                                Width="250"
+                                Margin="0,0,0,0"
+                                ac:ButtonExtensions.ButtonText="Settings"
+                                Content="{StaticResource ACSettings}"
+                                IsChecked="{Binding SettingsChecked, Mode=TwoWay}">
+                                <RadioButton.Style>
+                                    <Style BasedOn="{StaticResource ExpanderMenuButtonStyle}" TargetType="{x:Type RadioButton}">
+                                        <Setter Property="ac:WindowExtensions.SideBarItems">
+                                            <Setter.Value>
+                                                <Border Margin="0,0,0,0" Background="White">
+                                                    <StackPanel
+                                                        Width="250"
+                                                        Margin="-15,0,0,0"
+                                                        HorizontalAlignment="Stretch"
+                                                        Background="Transparent"
+                                                        Orientation="Vertical"
+                                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                                        <RadioButton
+                                                            x:Name="T1"
+                                                            Margin="0,0,0,0"
+                                                            Content="General"
+                                                            Style="{StaticResource RadioButtonTextStyle}" />
+                                                        <RadioButton
+                                                            x:Name="T2"
+                                                            Margin="0,-2.5,0,0"
+                                                            Content="Location"
+                                                            Style="{StaticResource RadioButtonTextStyle}" />
+                                                        <RadioButton
+                                                            x:Name="T3"
+                                                            Margin="0,-2.5,0,0"
+                                                            Content="Notifications"
+                                                            Style="{StaticResource RadioButtonTextStyle}" />
+                                                        <RadioButton
+                                                            x:Name="T4"
+                                                            Margin="0,-2.5,0,0"
+                                                            Content="Measurement Unit"
+                                                            Style="{StaticResource RadioButtonTextStyle}" />
+                                                        <RadioButton
+                                                            x:Name="T5"
+                                                            Margin="0,-2.5,0,0"
+                                                            Content="Name Prefixes"
+                                                            Style="{StaticResource RadioButtonTextStyle}" />
+                                                    </StackPanel>
+                                                </Border>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </RadioButton.Style>
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="ac:WindowExtensions.UserMenu">
+                <Setter.Value>
+                    <Grid WindowChrome.IsHitTestVisibleInChrome="True">
+                        <ToggleButton
+                            x:Name="ProfileButton"
+                            Content="A"
+                            IsChecked="{Binding OpenUserMenu}"
+                            Style="{StaticResource ProfileButtonStyle}" />
+                        <Popup
+                            Name="MenuList"
+                            IsOpen="{Binding OpenUserMenu}"
+                            Placement="Bottom"
+                            PlacementTarget="{Binding ElementName=ProfileButton}">
+                            <StackPanel Background="White" Orientation="Vertical">
+                                <Button
+                                    Width="120"
+                                    Height="30"
+                                    HorizontalContentAlignment="Left"
+                                    VerticalContentAlignment="Center"
+                                    Content="Settings" />
+                                <Button
+                                    Width="120"
+                                    Height="30"
+                                    HorizontalContentAlignment="Left"
+                                    VerticalContentAlignment="Center"
+                                    Content="Logout" />
+                            </StackPanel>
+                        </Popup>
+                    </Grid>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ac:AirCloudWindow.Style>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Border Padding="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Ribbon Height="Auto" Background="{StaticResource ACPrimaryRedBrush}">
+                    <Ribbon.ApplicationMenu>
+                        <RibbonApplicationMenu Visibility="Collapsed" />
+                    </Ribbon.ApplicationMenu>
+                    <!--<RibbonTab Header="File">
+                        <RibbonGroup DockPanel.Dock="Right">
+                            <RibbonMenuButton Label="EXPORT">
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="PREVIEW" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Width="auto"
+
+                                                Text="PREVIEW_REPORT" />
+                                        </Grid>
+                                    </RibbonMenuItem.Header>
+                                </RibbonMenuItem>
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="EDIT_REPORT_CONTENTS" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Width="auto"
+
+                                                Text="EDIT_REPORT_CONTENTSFILE" />
+                                        </Grid>
+
+                                    </RibbonMenuItem.Header>
+                                </RibbonMenuItem>
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="REPORT_EXCEL" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Width="auto"
+
+                                                Text="EXPORT_REPORT_AS_EXCELFILE" />
+                                        </Grid>
+
+                                    </RibbonMenuItem.Header>
+                                </RibbonMenuItem>
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="REPORT_PDF" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Width="auto"
+
+                                                Text="EXPORT_REPORT_AS_PDFFILE" />
+                                        </Grid>
+
+                                    </RibbonMenuItem.Header>
+                                </RibbonMenuItem>
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="REPORT_WORD" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Width="auto"
+
+                                                Text="EXPORT_REPORT_AS_WORDFILE" />
+                                        </Grid>
+                                    </RibbonMenuItem.Header>
+                                </RibbonMenuItem>
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="REPORT_DXF" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Width="auto"
+
+                                                Text="EXPORT_REPORT_AS_DXF_FILE" />
+                                        </Grid>
+                                    </RibbonMenuItem.Header>
+                                </RibbonMenuItem>
+                            </RibbonMenuButton>
+                        </RibbonGroup>
+                        <RibbonGroup>
+                            <RibbonButton ac:ButtonExtensions.RibbonContent="{StaticResource FileIcon}" Label="New" />
+                    -->
+                    <!--<RibbonButton ac:ButtonExtensions.RibbonContent="{StaticResource FileIcon}" Label="Import" />-->
+                    <!--
+                            <RibbonButton ac:ButtonExtensions.RibbonContent="{StaticResource FolderIcon}" Label="Open" />
+                    -->
+                    <!--<RibbonMenuButton Label="IMPORT">
+                                <RibbonMenuItem
+                                    Width="200"
+                                    Background="White"
+                                    Header="IMPORT_PROJECT" />
+                                <RibbonMenuItem
+                                    Width="200"
+                                    Background="White"
+                                    Header="IMPORT_RECENT"
+                                    ItemsSource="{Binding RecentProjectFilesData}"
+                                    ToolTip="Recent Files From System Documents Folder Only Appear Here" />
+                            </RibbonMenuButton>-->
+                    <!--
+                            <RibbonMenuButton ac:ButtonExtensions.RibbonContent="{StaticResource SaveIcon}" Label="Save">
+                                <RibbonMenuItem Width="200" Header="SAVE" />
+                                <RibbonMenuItem Width="200" Header="Save As" />
+                            </RibbonMenuButton>
+                            <RibbonButton ac:ButtonExtensions.RibbonContent="{StaticResource CloseIcon}" Label="Close" />
+                            <RibbonButton ac:ButtonExtensions.RibbonContent="{StaticResource RedoIcon}" Label="Redo" />
+                            <RibbonButton ac:ButtonExtensions.RibbonContent="{StaticResource UndoIcon}" Label="Undo" />
+
+                        </RibbonGroup>
+                    </RibbonTab>-->
+                    <RibbonTab Header="View" IsSelected="True">
+                        <RibbonGroup DockPanel.Dock="Right">
+                            <RibbonMenuButton
+                                ac:ButtonExtensions.Icon="{StaticResource ACExport}"
+                                IsEnabled="False"
+                                Label="Export Report">
+                                <RibbonMenuItem ac:ButtonExtensions.Icon="{StaticResource ACPdf}" Header="Export as PDF" />
+                                <RibbonMenuItem ac:ButtonExtensions.Icon="{StaticResource ACWord}" Header="Export as Word" />
+                                <RibbonMenuItem ac:ButtonExtensions.Icon="{StaticResource ACExcel}" Header="Export as Excel" />
+                            </RibbonMenuButton>
+                        </RibbonGroup>
+                        <RibbonGroup>
+                            <RibbonButton
+                                ac:ButtonExtensions.Icon="{StaticResource ACNewFile}"
+                                Click="Button_Click"
+                                Label="Controls" />
+                            <RibbonButton ac:ButtonExtensions.Icon="{StaticResource ACFolder}" Label="Open" />
+                            <RibbonButton ac:ButtonExtensions.Icon="{StaticResource ACSave}" Label="Piping" />
+                            <RibbonButton ac:ButtonExtensions.Icon="{StaticResource ACExport}" Label="Export" />
+                            <RibbonMenuButton ac:ButtonExtensions.Icon="{StaticResource ACSave}" Label="Save">
+                                <RibbonMenuItem
+                                    Width="Auto"
+                                    ac:ButtonExtensions.Icon="{StaticResource ACClose}"
+                                    Header="Save" />
+                                <!--<RibbonMenuItem Width="Auto" Header="Save As" />-->
+                                <RibbonMenuItem>
+                                    <RibbonMenuItem.Template>
+                                        <ControlTemplate TargetType="{x:Type RibbonMenuItem}">
+                                            <RibbonCheckBox Label="Test" />
+                                        </ControlTemplate>
+                                    </RibbonMenuItem.Template>
+                                </RibbonMenuItem>
+                            </RibbonMenuButton>
+                            <RibbonMenuButton
+                                Height="38"
+                                ac:ButtonExtensions.Command="{Binding TestCommand}"
+                                ac:ButtonExtensions.Enabled="False"
+                                ac:ButtonExtensions.Icon="{StaticResource ACLayoutView}"
+                                Label="LAYOUT_VIEW">
+                                <RibbonMenuItem
+                                    Command="{Binding LayoutViewChangedCommand}"
+                                    CommandParameter="Normal"
+                                    Header="NORMAL" />
+                                <RibbonMenuItem
+                                    Command="{Binding LayoutViewChangedCommand}"
+                                    CommandParameter="BinaryTree"
+                                    Header="BINARY_TREE"
+                                    IsEnabled="{Binding IsCntrlVisible}" />
+                                <RibbonMenuItem
+                                    x:Name="DBT"
+                                    Command="{Binding LayoutViewChangedCommand}"
+                                    CommandParameter="SchemaA"
+                                    Header="DOUBLE_BRANCH_BINARY_TREE"
+                                    IsEnabled="{Binding IsCntrlVisible}" />
+                            </RibbonMenuButton>
+                            <RibbonButton ac:ButtonExtensions.Icon="{StaticResource ACClose}" Label="Close" />
+                            <RibbonButton
+                                ac:ButtonExtensions.Icon="{StaticResource ACRedo}"
+                                IsEnabled="False"
+                                Label="Redo" />
+                            <RibbonButton
+                                ac:ButtonExtensions.Icon="{StaticResource ACUndo}"
+                                IsEnabled="False"
+                                Label="Undo" />
+                        </RibbonGroup>
+                    </RibbonTab>
+                    <RibbonTab Header="Test" />
+                </Ribbon>
+
+                <ToggleButton
+                    x:Name="Switch"
+                    Grid.Row="1"
+                    Width="75"
+                    Height="35"
+                    Margin="0,10,0,0"
+                    Content="Switch"
+                    IsChecked="True"
+                    IsThreeState="True" />
+                <CheckBox
+                    x:Name="ShowHeaders"
+                    Grid.Row="1"
+                    Margin="200,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Show" />
+
+                <StackPanel
+                    Grid.Row="2"
+                    Margin="0,25,0,0"
+                    Orientation="Vertical"
+                    Visibility="{Binding ElementName=Switch, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
+                            <TextBlock Text="Primary Buttons" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Large"
+                                ac:ButtonExtensions.ButtonType="Primary"
+                                Content="Large Button"
+                                IsDefault="True" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Large"
+                                ac:ButtonExtensions.ButtonType="Primary"
+                                Content="Large Button"
+                                IsEnabled="False" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Medium"
+                                ac:ButtonExtensions.ButtonType="Primary"
+                                Content="Medium Button" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Primary"
+                                Content="Small Button" />
+                            <Button
+                                Margin="0,5,0,0"
+                              
+                                Content="OK" />
+
+                            <Slider
+                                Width="250"
+                                Height="Auto"
+                                Margin="0,25,0,0"
+                                Interval="1"
+                                IsEnabled="False"
+                                Maximum="100"
+                                Minimum="0"
+                                Value="50" />
+
+                            <Slider
+                                Width="250"
+                                Height="Auto"
+                                Margin="0,10,0,0"
+                                Interval="1"
+                                Maximum="100"
+                                Minimum="0"
+                                Value="50" />
+
+                            <AdornerDecorator Margin="0,5,0,0">
+                                <DatePicker
+                                    x:Name="Test1"
+                                    Width="120"
+                                    Height="35"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Center"
+                                    ac:TeachingTip.InternalAdorner="{x:Null}"
+                                    ac:TeachingTip.IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}"
+                                    ac:TeachingTip.Template="{StaticResource Test}"
+                                    CalendarStyle="{StaticResource ACCalendarStyle}" />
+                            </AdornerDecorator>
+
+                        </StackPanel>
+                        <StackPanel
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Vertical">
+                            <TextBlock Text="Secondary Buttons" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Large"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                ac:ButtonExtensions.Count="12"
+                                ac:ButtonExtensions.CountVisibility="True"
+                                Content="Large Button" />
+
+                            <Button
+                                Width="42"
+                                Height="42"
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Auto"
+                                ac:ButtonExtensions.ButtonType="Auto"
+                                ac:ButtonExtensions.IconPosition="Left"
+                                Background="Black"
+                                Content="{StaticResource ACDelete}"
+                                Foreground="Black"
+                                Style="{StaticResource TextIconButtonStyle}" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Large"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                ac:ButtonExtensions.Count="12"
+                                ac:ButtonExtensions.CountVisibility="True"
+                                Content="Large Button"
+                                IsEnabled="False" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Medium"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Content="Medium Button" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Content="Small Button" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="Modal" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="Warning" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="Info" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="Error" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="Success" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="ProceedLater" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="SaveCancel" />
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="SaveDontSave" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="DeleteCancel" />
+
+                            <Button
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Click="Button_Click"
+                                Content="ShowResult" />
+
+                            <Button
+                                Width="75"
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Auto"
+                                ac:ButtonExtensions.ButtonText="Button"
+                                ac:ButtonExtensions.ButtonType="Auto"
+                                ac:ButtonExtensions.IconPosition="Left"
+                                Background="Black"
+                                Content="{StaticResource ACDelete}"
+                                Foreground="Black"
+                                Style="{StaticResource TextIconButtonStyle}" />
+
+                            <Button
+                                Width="75"
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Auto"
+                                ac:ButtonExtensions.ButtonText="Button"
+                                ac:ButtonExtensions.ButtonType="Auto"
+                                ac:ButtonExtensions.IconPosition="Right"
+                                Background="Black"
+                                Content="{StaticResource ACPlus}"
+                                Style="{StaticResource TextIconButtonStyle}"
+                                ToolTip="Some random text kjdnvkjnejnvneve kjnevjnven" />
+                        </StackPanel>
+                        <StackPanel
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Vertical">
+                            <TextBlock Text="Check Box, Radio Buttons" />
+                            <CheckBox
+                                Margin="0,5,0,0"
+                                Content="CheckBox"
+                                IsChecked="True" />
+                            <CheckBox
+                                Margin="0,5,0,0"
+                                Content="CheckBox"
+                                IsChecked="False" />
+
+                            <CheckBox
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Medium"
+                                Content="Medium CheckBox"
+                                IsChecked="False" />
+
+                            <CheckBox
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                ac:ButtonExtensions.Icon="{StaticResource ACBack}"
+                                ac:ButtonExtensions.IconColor="{StaticResource ACPrimaryRedBrush}"
+                                Content="Small CheckBox"
+                                IsChecked="False" />
+
+                            <RadioButton
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.Icon="{StaticResource ACBack}"
+                                ac:ButtonExtensions.IconColor="{StaticResource ACPrimaryRedBrush}"
+                                Content="RadioButton"
+                                IsChecked="True" />
+
+                            <RadioButton
+                                Margin="0,5,0,0"
+                                Content="RadioButton"
+                                IsChecked="False" />
+
+                            <RadioButton
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Medium"
+                                Content="RadioButton"
+                                GroupName="X1"
+                                IsChecked="True" />
+
+                            <RadioButton
+                                Margin="0,5,0,0"
+                                ac:ButtonExtensions.ButtonSize="Small"
+                                Content="RadioButton"
+                                GroupName="X2"
+                                IsChecked="True" />
+
+                            <Button
+                                Width="120"
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                ac:ButtonExtensions.Icon="{StaticResource ACPlus}"
+                                ac:ButtonExtensions.IconPosition="Right"
+                                Content="Text Button"
+                                Style="{StaticResource TextButtonStyle}" />
+
+                            <Button
+                                Width="142"
+                                Height="42"
+                                HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                ac:ButtonExtensions.ButtonSize="Auto"
+                                ac:ButtonExtensions.ButtonType="Secondary"
+                                Content="Add Accessories" />
+
+                            <ListView
+                                x:Name="IduList"
+                                Width="Auto"
+                                Height="180"
+                                Margin="0,5,0,0"
+                                ac:GridExtensions.Header="IDUs"
+                                Background="White"
+                                IsSynchronizedWithCurrentItem="True"
+                                ItemContainerStyle="{StaticResource ItemStyle}"
+                                ItemsSource="{Binding Idus}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="15" Header="" />
+                                        <GridViewColumn Width="90" Header="UnitName" />
+                                        <GridViewColumn Width="100" Header="Model" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel
+                            x:Name="CustomStack"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Vertical">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                <ComboBox
+                                    Width="250"
+                                    ac:ComboBoxExtensions.BoxSize="Large"
+                                    ac:ComboBoxExtensions.ErrorHeight="0"
+                                    ac:ComboBoxExtensions.Header="ComboBox"
+                                    ac:ComboBoxExtensions.PlaceHolder="Select"
+                                    IsEnabled="{Binding ElementName=Combo, Path=IsChecked}">
+                                    <ComboBoxItem Content="T1 kdk kdnvke koejfe kenvken ejfejoef" />
+                                    <ComboBoxItem Content="T2" />
+                                    <ComboBoxItem Content="T3" />
+                                    <ComboBoxItem Content="T4" />
+                                </ComboBox>
+                                <ac:AirCloudNumberBox
+                                    x:Name="NumericSpinner"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    BindWhileInput="True"
+                                    BoxSize="Large"
+                                    ErrorHeight="0"
+                                    ErrorMessage="{Binding ErrMsg}"
+                                    Header="Cooling Relative Humidity (%)"
+                                    MaxValue="25"
+                                    MinValue="-5"
+                                    Unit="%"
+                                    ValueChange="{Binding ValueChangeListnerCommand}"
+                                    Value="10" />
+                                <CheckBox
+                                    x:Name="Combo"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    ac:ButtonExtensions.ButtonSize="Large"
+                                    Content="ComboState"
+                                    IsChecked="True" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
+                                <CheckBox
+                                    x:Name="Clear"
+                                    Content="Clear All"
+                                    IsChecked="{Binding ElementName=MC, Path=SelectedItems.Count, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    IsEnabled="{Binding ElementName=MC, Path=SelectedItems.Count}"
+                                    Unchecked="Clear_Unchecked" />
+                                <CheckBox
+                                    x:Name="ClearSource"
+                                    Checked="ClearSource_Checked"
+                                    Content="Clear Source"
+                                    Unchecked="ClearSource_Checked" />
+                                <ac:MultiSelectComboBox
+                                    x:Name="MC"
+                                    Width="250"
+                                    Margin="8,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    ac:ComboBoxExtensions.BoxSize="Medium"
+                                    ac:ComboBoxExtensions.ErrorHeight="0"
+                                    ac:ComboBoxExtensions.Header="MultiSelect Combo"
+                                    ItemChecked="{Binding CheckBoxCommand}"
+                                    ItemUnChecked="{Binding CheckBoxCommand}"
+                                    ItemsSource="{Binding Items}"
+                                    SelectedItems="{Binding SelectedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <TextBlock
+                                Margin="0,2,0,4"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Text="{Binding ElementName=MC, Path=Text}" />
+
+                            <ComboBox
+                                Width="250"
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Left"
+                                ac:ComboBoxExtensions.BoxSize="Large"
+                                ac:ComboBoxExtensions.Header="ComboBox"
+                                ac:ComboBoxExtensions.PlaceHolder="Select">
+                                <ComboBoxItem Content="T1" />
+                                <ComboBoxItem Content="T2" />
+                                <ComboBoxItem Content="T3" />
+                                <ComboBoxItem Content="T4" />
+                            </ComboBox>
+
+                            <ac:AirCloudNumberBox
+                                HorizontalAlignment="Left"
+                                BoxSize="Large"
+                                CommandParameter="Test"
+                                DigitsOnly="True"
+                                ErrorHeight="0"
+                                ErrorMessage="{Binding ErrMsg}"
+                                Header="Cooling Relative Humidity (%)"
+                                HeaderSize="10"
+                                MaxValue="25"
+                                MinValue="0"
+                                Step="1"
+                                Unit="%"
+                                ValueChange="{Binding TextChangedCommand}" />
+
+                            <ac:AirCloudNumberBox
+                                x:Name="NumericSpinner1"
+                                HorizontalAlignment="Left"
+                                ErrorMessage="{Binding ErrMsg}"
+                                Header="Cooling Relative Humidity (%)"
+                                HeaderSize="10"
+                                MaxValue="25"
+                                MinValue="0"
+                                ShowBoxOnly="False"
+                                Step="1"
+                                Unit="%" />
+
+                            <ac:AirCloudRibbon
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Stretch"
+                                Content="Information"
+                                IsActive="True"
+                                RibbonType="Information" />
+                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                                <CheckBox Content="Open Flyer" IsChecked="{Binding OpenFlyer, Mode=TwoWay}" />
+                                <ac:AirCloudRibbon
+                                    Margin="8,0,0,0"
+                                    HorizontalAlignment="Stretch"
+                                    AutoHide="True"
+                                    Content="Error"
+                                    IsActive="{Binding OpenFlyer, Mode=TwoWay}"
+                                    RibbonType="Error" />
+                            </StackPanel>
+                            <ac:AirCloudRibbon
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Stretch"
+                                Content="Warning"
+                                IsActive="True"
+                                RibbonType="Warning" />
+                            <ac:AirCloudRibbon
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Stretch"
+                                Content="Success"
+                                IsActive="True"
+                                RibbonType="Success" />
+
+                            <Expander
+                                HorizontalAlignment="Stretch"
+                                Background="White"
+                                BorderBrush="White"
+                                BorderThickness="1"
+                                Header="Outdoor Details">
+                                <Border
+                                    Width="150"
+                                    Height="100"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="{StaticResource ACPrimaryGraphiteBrush}" />
+                            </Expander>
+
+                            <ProgressBar Width="300" Value="25" />
+
+                            <TreeView Margin="0,10,0,0">
+                                <TreeViewItem IsExpanded="True">
+                                    <TreeViewItem.Header>
+                                        <Border>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path
+                                                    Width="15"
+                                                    Height="15"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Data="{Binding Source={StaticResource ACSuccess}}"
+                                                    Fill="{StaticResource ACSystemSuccessBrush}"
+                                                    Stretch="Uniform" />
+                                                <TextBlock
+                                                    Margin="8,0,0,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="12"
+                                                    Foreground="{StaticResource ACPrimaryBlackTextBrush}"
+                                                    Text="System1" />
+                                            </StackPanel>
+                                        </Border>
+                                    </TreeViewItem.Header>
+                                    <TreeViewItem Header="Level 2.1" />
+                                    <TreeViewItem Header="Level 2.2" IsExpanded="True">
+                                        <TreeViewItem Header="Level 3.1" />
+                                        <TreeViewItem Header="Level 3.2" />
+                                    </TreeViewItem>
+                                    <TreeViewItem Header="Level 2.3" />
+                                </TreeViewItem>
+                            </TreeView>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <TextBox
+                            Width="300"
+                            Height="350"
+                            ac:TeachingTip.IsVisible="True"
+                            ac:TeachingTip.Template="{StaticResource Test}"
+                            ac:TextBoxExtensions.IsEditable="True"
+                            Style="{StaticResource TextBoxRevealStyle}" />
+
+                        <TextBox
+                            Width="300"
+                            Height="350"
+                            Margin="20,5,0,0"
+                            Padding="8,16,0,0"
+                            VerticalContentAlignment="Top"
+                            ac:TextBoxExtensions.Header="Fullname"
+                            ac:TextBoxExtensions.IsRequired="True"
+                            ac:TextBoxExtensions.PlaceHolderMargin="16,16,0,0"
+                            ac:TextBoxExtensions.PlaceholderText="Username"
+                            Style="{StaticResource TextBoxRevealStyle}" />
+
+                        <PasswordBox
+                            Width="300"
+                            Margin="20,5,0,0"
+                            ac:TextBoxExtensions.BoxSize="Medium"
+                            ac:TextBoxExtensions.Header="Password"
+                            ac:TextBoxExtensions.PlaceholderText="Password"
+                            Style="{StaticResource PasswordBoxRevealStyle}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <DataGrid
+                    Grid.Row="2"
+                    Margin="20,50,20,20"
+                    ac:GridExtensions.Command="{Binding TextChangedCommand}"
+                    ac:GridExtensions.CommandParameter="Hello"
+                    ac:GridExtensions.ShowCustomHeaders="{Binding Path=IsChecked, ElementName=ShowHeaders}"
+                    AlternationCount="2"
+                    AutoGenerateColumns="False"
+                    Background="White"
+                    CanUserAddRows="False"
+                    ColumnWidth="*"
+                    ItemsSource="{Binding Idus, Mode=TwoWay}"
+                    Visibility="{Binding ElementName=Switch, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn
+                            CellStyle="{StaticResource CheckBoxCellStyle}"
+                            ElementStyle="{StaticResource {x:Type CheckBox}}"
+                            Header=""
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox
+                                        Margin="0,25,0,1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        ac:ButtonExtensions.ButtonSize="Large" />
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn
+                            Binding="{Binding IndoorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Header="TextBox"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style BasedOn="{StaticResource TextBoxCellStyle}" TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="ac:TextBoxExtensions.ErrorText" Value="Hello" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding IndoorName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Header="TextBox"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style BasedOn="{StaticResource TextBoxCellStyle}" TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="ac:TextBoxExtensions.ErrorText" Value="" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn
+                            Binding="{Binding IndoorName}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="UnitName"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+
+                        <DataGridTemplateColumn
+                            Width="5"
+                            Header=""
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}">
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                <Border
+                                                    Width="4"
+                                                    Height="17"
+                                                    Background="{StaticResource ACPrimaryRedBrush}"
+                                                    BorderBrush="Transparent"
+                                                    BorderThickness="0" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding FloorName}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Floor"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding RoomName}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Room"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            ac:GridExtensions.HideRightBorder="True"
+                            Binding="{Binding DisplayName}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Model"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding Cooling}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Cooling">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style BasedOn="{StaticResource ColumnHeaderStyle}" TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ac:GridExtensions.Header" Value="Selected Capacity" />
+                                    <Setter Property="ac:GridExtensions.ColumnSpan" Value="3" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding Heating}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Heating"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding SensibleHeating}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Sensible"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding Airflow}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Airflow"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding DbCooling}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="DB Cooling">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style BasedOn="{StaticResource ColumnHeaderStyle}" TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ac:GridExtensions.Header" Value="Temperature" />
+                                    <Setter Property="ac:GridExtensions.ColumnSpan" Value="3" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding WbCooling}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="WB Cooling"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding RhCooling}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Cooling Relative Humidity (%)"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding DbHeating}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="DB Heating"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding IndoorName}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="UnitName"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Binding="{Binding FloorName}"
+                            CellStyle="{StaticResource DefaultCellStyle}"
+                            Header="Floor"
+                            HeaderStyle="{StaticResource ColumnHeaderStyle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!--<Calendar
+                    Grid.Row="2"
+                    Width="600"
+                    Height="600"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    CalendarButtonStyle="{DynamicResource ACCalendarButtonStyle}"
+                    CalendarItemStyle="{DynamicResource ACCalendarItemStyle}">
+                    <Calendar.Style>
+                        <Style BasedOn="{StaticResource ACCalendarStyle}" TargetType="{x:Type Calendar}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=Switch, Path=IsChecked}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Calendar.Style>
+                </Calendar>-->
+
+            </Grid>
+        </Border>
+    </Grid>
+</ac:AirCloudWindow>

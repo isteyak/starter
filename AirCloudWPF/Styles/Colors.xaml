@@ -1,0 +1,76 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AirCloudWPF">
+
+    <!--  System Colors  -->
+    <Color x:Key="ACSystemDanger">#FFC3002F</Color>
+    <Color x:Key="ACSystemDanger1">#FFFCDCE4</Color>
+    <Color x:Key="ACSystemWarning">#FFFFDA51</Color>
+    <Color x:Key="ACSystemWarning1">#FFFFF7D9</Color>
+    <Color x:Key="ACSystemInfo">#FF2DDDFA</Color>
+    <Color x:Key="ACSystemInfo1">#FFD4F9FF</Color>
+    <Color x:Key="ACSystemSuccess">#FF15E98E</Color>
+    <Color x:Key="ACSystemSuccess1">#FFDAF4E9</Color>
+    <!--  System Colors End  -->
+
+    <!--  Primary Colors  -->
+    <Color x:Key="ACPrimaryRed">#FFC3002F</Color>
+    <Color x:Key="ACPrimaryRedDark">#FFA60028</Color>
+    <Color x:Key="ACPrimaryRedLight1">#FFD2103E</Color>
+    <Color x:Key="ACPrimaryRedLight2">#FFE21F4E</Color>
+    <Color x:Key="ACPrimaryRedLight3">#FFF3416C</Color>
+    <Color x:Key="ACPrimaryRedLight4">#FFFF6F91</Color>
+    <Color x:Key="ACPrimaryRedLight5">#FFFCDCE4</Color>
+
+    <Color x:Key="ACPrimaryGraphite">#FF151515</Color>
+    <Color x:Key="ACPrimaryGraphiteDark">#FF000000</Color>
+    <Color x:Key="ACPrimaryGraphiteLight1">#FF333333</Color>
+    <Color x:Key="ACPrimaryGraphiteLight2">#FF444444</Color>
+    <Color x:Key="ACPrimaryGraphiteLight3">#FF555555</Color>
+    <Color x:Key="ACPrimaryGraphiteLight4">#FF666666</Color>
+    <Color x:Key="ACPrimaryGraphiteLight5">#FF070707</Color>
+    <!--  Primary Colors End  -->
+
+    <!--  Secondary Colors  -->
+    <Color x:Key="ACCraft">#FFEEE6DB</Color>
+    <Color x:Key="ACCraftDark">#FFD3CBC1</Color>
+    <Color x:Key="ACCraftLight1">#FFEFEAE1</Color>
+    <Color x:Key="ACCraftLight2">#FFF1EEE8</Color>
+    <Color x:Key="ACCraftLight3">#FFF4F3EE</Color>
+    <Color x:Key="ACCraftLight4">#FFF6F7F5</Color>
+    <Color x:Key="ACBlueSecondary">#FFDCEBEC</Color>
+    <Color x:Key="ACBlueDark">#FFC5D2D3</Color>
+    <Color x:Key="ACBlueLight1">#FFE3EFEF</Color>
+    <Color x:Key="ACBlueLight2">#FFEAF3F3</Color>
+    <Color x:Key="ACBlueLight3">#FFF1F7F7</Color>
+    <Color x:Key="ACBlueLight4">#FFF8FBFB</Color>
+    <!--  Secondary Colors End  -->
+
+    <!--  Territory Colors  -->
+    <Color x:Key="ACCoolTurquoise">#FF54CCC9</Color>
+    <Color x:Key="ACCoolViolet">#FF8331A7</Color>
+    <Color x:Key="ACCoolPurple">#FFD83BB3</Color>
+    <Color x:Key="ACCoolOrange">#FFEA8E6A</Color>
+    <Color x:Key="ACWarmOrange">#FFF5A800</Color>
+    <Color x:Key="ACWarmYellow">#FFFFD600</Color>
+    <Color x:Key="ACWarmGreen">#FF95CC75</Color>
+    <Color x:Key="ACWarmBlue">#FF00A8E2</Color>
+    <!--  Territory Colors End  -->
+
+    <!--  Grays  -->
+    <Color x:Key="ACGray1">#FF7F7F7F</Color>
+    <Color x:Key="ACGray2">#FF9A9A9A</Color>
+    <Color x:Key="ACGray3">#FFB9B9B9</Color>
+    <Color x:Key="ACGray4">#FFD2D2D2</Color>
+    <Color x:Key="ACGray5">#FFEDEDED</Color>
+    <Color x:Key="ACGray6">#FFF7F7F7</Color>
+    <!--  Grays End  -->
+
+    <!--  Text Colors  -->
+    <Color x:Key="ACPrimaryBlackText">#FF151515</Color>
+    <Color x:Key="ACPrimaryRedText">#FFC3002F</Color>
+    <Color x:Key="ACPrimaryGreyText">#FFB9B9B9</Color>
+    <Color x:Key="ACTernaryRed">#FFF9DDE4</Color>
+    <!--  Text Colors End  -->
+</ResourceDictionary>

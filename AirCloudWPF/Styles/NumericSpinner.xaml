@@ -1,0 +1,45 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AirCloudWPF">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/Buttons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/FallbackSizes.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/PathFigures.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  Width: 64.5,  TextBox Margin: 12, Height: 32  -->
+    <ControlTemplate x:Key="NumericSpinner" TargetType="{x:Type TextBox}">
+        <Border x:Name="SpinnerBorder">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="16" />
+                    <RowDefinition Height="16" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                </Grid.ColumnDefinitions>
+                <ScrollViewer
+                    x:Name="PART_ContentHost"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Margin="12,0,0,0"
+                    Background="Transparent"
+                    FontSize="{StaticResource NumericSpinner}" />
+                <RepeatButton
+                    x:Name="Up"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource RepeatButtonStyle}" />
+                <RepeatButton
+                    x:Name="Down"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Style="{StaticResource RepeatButtonStyle}" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers />
+    </ControlTemplate>
+</ResourceDictionary>

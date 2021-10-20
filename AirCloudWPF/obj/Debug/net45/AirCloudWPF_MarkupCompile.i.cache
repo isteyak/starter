@@ -1,0 +1,20 @@
+﻿AirCloudWPF
+6.5.0.0
+
+library
+C#
+.cs
+E:\dev release\AirCloudWPF\AirCloudWPF\obj\Debug\net45\
+AirCloudWPF
+none
+false
+TRACE;DEBUG;NETFRAMEWORK;NET45;
+
+28-1610068434
+
+44450437950
+32-353824832
+Controls\AirCloudLoader.xaml;Controls\AirCloudNumberBox.xaml;Controls\CustomStatusBar.xaml;Controls\MultiSelectComboBox.xaml;Styles\Brushes.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\ComboBox.xaml;Styles\CommandBar.xaml;Styles\Controls.xaml;Styles\DataGrid.xaml;Styles\DatePicker.xaml;Styles\Expander.xaml;Styles\FallbackSizes.xaml;Styles\ListBox.xaml;Styles\MenuItem.xaml;Styles\MultiSelectComboBox.xaml;Styles\NumericSpinner.xaml;Styles\PathFigures.xaml;Styles\ProgressBar.xaml;Styles\Ribbon.xaml;Styles\ScrollBar.xaml;Styles\Slider.xaml;Styles\TextBox.xaml;Styles\Timeline.xaml;Styles\TreeView.xaml;Styles\Window.xaml;Themes\Generic.xaml;
+
+False
+

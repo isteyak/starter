@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:Double x:Key="NumericSpinner">14</sys:Double>
+    <sys:Double x:Key="GlobalHeaderSize">14</sys:Double>
+    <sys:Double x:Key="GlobalTextSize">12</sys:Double>
+    <sys:Double x:Key="ScrollBarTrackSize">20</sys:Double>
+    <sys:Double x:Key="ScrollBarThumbSize">16</sys:Double>
+    <sys:Double x:Key="ScrollBarThumbDoubleSize">32</sys:Double>
+    <sys:Double x:Key="ScrollBarThumbRadius">8</sys:Double>
+</ResourceDictionary>

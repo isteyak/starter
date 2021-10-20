@@ -1,0 +1,30 @@
+﻿<UserControl
+    x:Class="AirCloudWPF.CustomStatusBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AirCloudWPF"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Height="15"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource ACPrimaryRedBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="White">
+            <local:AirCloudLoader />
+        </Grid>
+
+        <TextBlock
+            Grid.Column="1"
+            MinWidth="150"
+            Margin="5,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            FontSize="10"
+            Foreground="White"
+            Text="Data" />
+    </Grid>
+</UserControl>

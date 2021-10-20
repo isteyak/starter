@@ -1,0 +1,374 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.5": {
+      "CommonServiceLocator/2.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommonServiceLocator.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommonServiceLocator.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System",
+          "System.Core",
+          "System.XML",
+          "System.Xaml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Xaml.Behaviors.dll": {}
+        }
+      },
+      "Prism.Core/7.1.0.431": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Prism.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Prism.dll": {}
+        }
+      },
+      "Prism.Wpf/7.1.0.431": {
+        "type": "package",
+        "dependencies": {
+          "CommonServiceLocator": "2.0.4",
+          "Prism.Core": "7.1.0.431"
+        },
+        "frameworkAssemblies": [
+          "System.Configuration"
+        ],
+        "compile": {
+          "lib/net45/Prism.Wpf.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Prism.Wpf.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        }
+      },
+      "Unity/5.8.11": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommonServiceLocator.dll": {},
+          "lib/net45/Unity.Abstractions.dll": {},
+          "lib/net45/Unity.Configuration.dll": {},
+          "lib/net45/Unity.Container.dll": {},
+          "lib/net45/Unity.Interception.Configuration.dll": {},
+          "lib/net45/Unity.Interception.dll": {},
+          "lib/net45/Unity.RegistrationByConvention.dll": {},
+          "lib/net45/Unity.ServiceLocation.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommonServiceLocator.dll": {},
+          "lib/net45/Unity.Abstractions.dll": {},
+          "lib/net45/Unity.Configuration.dll": {},
+          "lib/net45/Unity.Container.dll": {},
+          "lib/net45/Unity.Interception.Configuration.dll": {},
+          "lib/net45/Unity.Interception.dll": {},
+          "lib/net45/Unity.RegistrationByConvention.dll": {},
+          "lib/net45/Unity.ServiceLocation.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CommonServiceLocator/2.0.4": {
+      "sha512": "YpXfV5l6kv1iQRDfhQnN4RxocbnNehU/rAAS62IlaQUTAKN3WoUbtx9MHwE98Pb09mBemSs4xhVqFhXq27rjxw==",
+      "type": "package",
+      "path": "commonservicelocator/2.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CommonServiceLocator.2.0.4.nupkg.sha512",
+        "CommonServiceLocator.nuspec",
+        "lib/net40/CommonServiceLocator.dll",
+        "lib/net45/CommonServiceLocator.dll",
+        "lib/net46/CommonServiceLocator.dll",
+        "lib/net47/CommonServiceLocator.dll",
+        "lib/netcoreapp1.0/CommonServiceLocator.dll",
+        "lib/netcoreapp2.0/CommonServiceLocator.dll",
+        "lib/netstandard1.0/CommonServiceLocator.dll",
+        "lib/netstandard2.0/CommonServiceLocator.dll"
+      ]
+    },
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "sha512": "5sPWkbqImc2t1aQwIfJcKsUo7tOg1Tr8+6xVzZJB56Nzt4u9NlpcLofgdX/aRYpPKdWDA3U23Akw1KQzU5e82g==",
+      "type": "package",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.19",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Design/Microsoft.Xaml.Behaviors.Design.dll",
+        "lib/net45/Microsoft.Xaml.Behaviors.dll",
+        "lib/net45/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net45/Microsoft.Xaml.Behaviors.xml",
+        "lib/netcoreapp3.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.dll",
+        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.pdb",
+        "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.xml",
+        "microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+        "microsoft.xaml.behaviors.wpf.nuspec",
+        "tools/Install.ps1"
+      ]
+    },
+    "Prism.Core/7.1.0.431": {
+      "sha512": "l4sBztXr1d2aJ1Ub5OKcd8dkf18UV7k+DWRbi0uen8y0pqb0tH+OC1/B35ZvaxMNlCtl1VZYbeq6wypdcrt92A==",
+      "type": "package",
+      "path": "prism.core/7.1.0.431",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Prism.Core.7.1.0.431.nupkg.sha512",
+        "Prism.Core.nuspec",
+        "lib/net45/Prism.dll",
+        "lib/net45/Prism.pdb",
+        "lib/net45/Prism.xml",
+        "lib/netstandard1.0/Prism.dll",
+        "lib/netstandard1.0/Prism.pdb",
+        "lib/netstandard1.0/Prism.xml",
+        "lib/netstandard2.0/Prism.dll",
+        "lib/netstandard2.0/Prism.pdb",
+        "lib/netstandard2.0/Prism.xml",
+        "lib/uap10.0.15063/Prism.dll",
+        "lib/uap10.0.15063/Prism.pdb",
+        "lib/uap10.0.15063/Prism.pri",
+        "lib/uap10.0.15063/Prism.xml",
+        "lib/uap10.0.16299/Prism.dll",
+        "lib/uap10.0.16299/Prism.pdb",
+        "lib/uap10.0.16299/Prism.pri",
+        "lib/uap10.0.16299/Prism.xml"
+      ]
+    },
+    "Prism.Wpf/7.1.0.431": {
+      "sha512": "vcSet3jJxN4Ypf4GLPHvIYz3xQJV1E1e+uTJrsw6FkZd0mrjc0vUTZciQ3PoMRzGr5pf3iktMtScmCQhBJZMIw==",
+      "type": "package",
+      "path": "prism.wpf/7.1.0.431",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Prism.Wpf.7.1.0.431.nupkg.sha512",
+        "Prism.Wpf.nuspec",
+        "lib/net45/Prism.Wpf.dll",
+        "lib/net45/Prism.Wpf.pdb",
+        "lib/net45/Prism.Wpf.xml",
+        "lib/net45/System.Windows.Interactivity.dll"
+      ]
+    },
+    "Unity/5.8.11": {
+      "sha512": "eOmm7Iw4RXKMpTuU3kd30lzcAjhcLUNh4JGKajR+mZ7m6MGUQhgdwNSS1tsdFiqXJxpka0CIgoGUFGnY4hXo3Q==",
+      "type": "package",
+      "path": "unity/5.8.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/CommonServiceLocator.dll",
+        "lib/net40/CommonServiceLocator.pdb",
+        "lib/net40/Unity.Abstractions.dll",
+        "lib/net40/Unity.Abstractions.pdb",
+        "lib/net40/Unity.Configuration.dll",
+        "lib/net40/Unity.Configuration.pdb",
+        "lib/net40/Unity.Container.dll",
+        "lib/net40/Unity.Container.pdb",
+        "lib/net40/Unity.ServiceLocation.dll",
+        "lib/net40/Unity.ServiceLocation.pdb",
+        "lib/net45/CommonServiceLocator.dll",
+        "lib/net45/CommonServiceLocator.pdb",
+        "lib/net45/Unity.Abstractions.dll",
+        "lib/net45/Unity.Abstractions.pdb",
+        "lib/net45/Unity.Configuration.dll",
+        "lib/net45/Unity.Configuration.pdb",
+        "lib/net45/Unity.Container.dll",
+        "lib/net45/Unity.Container.pdb",
+        "lib/net45/Unity.Interception.Configuration.dll",
+        "lib/net45/Unity.Interception.Configuration.pdb",
+        "lib/net45/Unity.Interception.dll",
+        "lib/net45/Unity.Interception.pdb",
+        "lib/net45/Unity.RegistrationByConvention.dll",
+        "lib/net45/Unity.RegistrationByConvention.pdb",
+        "lib/net45/Unity.ServiceLocation.dll",
+        "lib/net45/Unity.ServiceLocation.pdb",
+        "lib/net46/CommonServiceLocator.dll",
+        "lib/net46/CommonServiceLocator.pdb",
+        "lib/net46/Unity.Abstractions.dll",
+        "lib/net46/Unity.Abstractions.pdb",
+        "lib/net46/Unity.Configuration.dll",
+        "lib/net46/Unity.Configuration.pdb",
+        "lib/net46/Unity.Container.dll",
+        "lib/net46/Unity.Container.pdb",
+        "lib/net46/Unity.Interception.Configuration.dll",
+        "lib/net46/Unity.Interception.Configuration.pdb",
+        "lib/net46/Unity.Interception.dll",
+        "lib/net46/Unity.Interception.pdb",
+        "lib/net46/Unity.RegistrationByConvention.dll",
+        "lib/net46/Unity.RegistrationByConvention.pdb",
+        "lib/net46/Unity.ServiceLocation.dll",
+        "lib/net46/Unity.ServiceLocation.pdb",
+        "lib/net47/CommonServiceLocator.dll",
+        "lib/net47/CommonServiceLocator.pdb",
+        "lib/net47/Unity.Abstractions.dll",
+        "lib/net47/Unity.Abstractions.pdb",
+        "lib/net47/Unity.Configuration.dll",
+        "lib/net47/Unity.Configuration.pdb",
+        "lib/net47/Unity.Container.dll",
+        "lib/net47/Unity.Container.pdb",
+        "lib/net47/Unity.Interception.Configuration.dll",
+        "lib/net47/Unity.Interception.Configuration.pdb",
+        "lib/net47/Unity.Interception.dll",
+        "lib/net47/Unity.Interception.pdb",
+        "lib/net47/Unity.RegistrationByConvention.dll",
+        "lib/net47/Unity.RegistrationByConvention.pdb",
+        "lib/net47/Unity.ServiceLocation.dll",
+        "lib/net47/Unity.ServiceLocation.pdb",
+        "lib/netcoreapp1.0/CommonServiceLocator.deps.json",
+        "lib/netcoreapp1.0/CommonServiceLocator.dll",
+        "lib/netcoreapp1.0/CommonServiceLocator.pdb",
+        "lib/netcoreapp1.0/Unity.Abstractions.deps.json",
+        "lib/netcoreapp1.0/Unity.Abstractions.dll",
+        "lib/netcoreapp1.0/Unity.Abstractions.pdb",
+        "lib/netcoreapp1.0/Unity.Container.deps.json",
+        "lib/netcoreapp1.0/Unity.Container.dll",
+        "lib/netcoreapp1.0/Unity.Container.pdb",
+        "lib/netcoreapp1.0/Unity.ServiceLocation.deps.json",
+        "lib/netcoreapp1.0/Unity.ServiceLocation.dll",
+        "lib/netcoreapp1.0/Unity.ServiceLocation.pdb",
+        "lib/netcoreapp2.0/CommonServiceLocator.deps.json",
+        "lib/netcoreapp2.0/CommonServiceLocator.dll",
+        "lib/netcoreapp2.0/CommonServiceLocator.pdb",
+        "lib/netcoreapp2.0/Unity.Abstractions.deps.json",
+        "lib/netcoreapp2.0/Unity.Abstractions.dll",
+        "lib/netcoreapp2.0/Unity.Abstractions.pdb",
+        "lib/netcoreapp2.0/Unity.Configuration.deps.json",
+        "lib/netcoreapp2.0/Unity.Configuration.dll",
+        "lib/netcoreapp2.0/Unity.Configuration.pdb",
+        "lib/netcoreapp2.0/Unity.Container.deps.json",
+        "lib/netcoreapp2.0/Unity.Container.dll",
+        "lib/netcoreapp2.0/Unity.Container.pdb",
+        "lib/netcoreapp2.0/Unity.Interception.Configuration.deps.json",
+        "lib/netcoreapp2.0/Unity.Interception.Configuration.dll",
+        "lib/netcoreapp2.0/Unity.Interception.Configuration.pdb",
+        "lib/netcoreapp2.0/Unity.Interception.deps.json",
+        "lib/netcoreapp2.0/Unity.Interception.dll",
+        "lib/netcoreapp2.0/Unity.Interception.pdb",
+        "lib/netcoreapp2.0/Unity.RegistrationByConvention.deps.json",
+        "lib/netcoreapp2.0/Unity.RegistrationByConvention.dll",
+        "lib/netcoreapp2.0/Unity.RegistrationByConvention.pdb",
+        "lib/netcoreapp2.0/Unity.ServiceLocation.deps.json",
+        "lib/netcoreapp2.0/Unity.ServiceLocation.dll",
+        "lib/netcoreapp2.0/Unity.ServiceLocation.pdb",
+        "lib/netstandard1.0/CommonServiceLocator.deps.json",
+        "lib/netstandard1.0/CommonServiceLocator.dll",
+        "lib/netstandard1.0/CommonServiceLocator.pdb",
+        "lib/netstandard1.0/Unity.Abstractions.deps.json",
+        "lib/netstandard1.0/Unity.Abstractions.dll",
+        "lib/netstandard1.0/Unity.Abstractions.pdb",
+        "lib/netstandard1.0/Unity.Container.deps.json",
+        "lib/netstandard1.0/Unity.Container.dll",
+        "lib/netstandard1.0/Unity.Container.pdb",
+        "lib/netstandard1.0/Unity.ServiceLocation.deps.json",
+        "lib/netstandard1.0/Unity.ServiceLocation.dll",
+        "lib/netstandard1.0/Unity.ServiceLocation.pdb",
+        "lib/netstandard2.0/CommonServiceLocator.deps.json",
+        "lib/netstandard2.0/CommonServiceLocator.dll",
+        "lib/netstandard2.0/CommonServiceLocator.pdb",
+        "lib/netstandard2.0/Unity.Abstractions.deps.json",
+        "lib/netstandard2.0/Unity.Abstractions.dll",
+        "lib/netstandard2.0/Unity.Abstractions.pdb",
+        "lib/netstandard2.0/Unity.Configuration.deps.json",
+        "lib/netstandard2.0/Unity.Configuration.dll",
+        "lib/netstandard2.0/Unity.Configuration.pdb",
+        "lib/netstandard2.0/Unity.Container.deps.json",
+        "lib/netstandard2.0/Unity.Container.dll",
+        "lib/netstandard2.0/Unity.Container.pdb",
+        "lib/netstandard2.0/Unity.Interception.Configuration.deps.json",
+        "lib/netstandard2.0/Unity.Interception.Configuration.dll",
+        "lib/netstandard2.0/Unity.Interception.Configuration.pdb",
+        "lib/netstandard2.0/Unity.Interception.deps.json",
+        "lib/netstandard2.0/Unity.Interception.dll",
+        "lib/netstandard2.0/Unity.Interception.pdb",
+        "lib/netstandard2.0/Unity.RegistrationByConvention.deps.json",
+        "lib/netstandard2.0/Unity.RegistrationByConvention.dll",
+        "lib/netstandard2.0/Unity.RegistrationByConvention.pdb",
+        "lib/netstandard2.0/Unity.ServiceLocation.deps.json",
+        "lib/netstandard2.0/Unity.ServiceLocation.dll",
+        "lib/netstandard2.0/Unity.ServiceLocation.pdb",
+        "unity.5.8.11.nupkg.sha512",
+        "unity.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.5": [
+      "Microsoft.Xaml.Behaviors.Wpf >= 1.1.19",
+      "Prism.Wpf >= 7.1.0.431",
+      "Unity >= 5.8.11"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\isteyak.a\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "6.5.0",
+    "restore": {
+      "projectUniqueName": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj",
+      "projectName": "AirCloudWPF",
+      "projectPath": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj",
+      "packagesPath": "C:\\Users\\isteyak.a\\.nuget\\packages\\",
+      "outputPath": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\obj\\",
+      "projectStyle": "PackageReference",
+      "crossTargeting": true,
+      "configFilePaths": [
+        "C:\\Users\\isteyak.a\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net45"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net45": {
+          "targetAlias": "net45",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net45": {
+        "targetAlias": "net45",
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": {
+            "target": "Package",
+            "version": "[1.1.19, )"
+          },
+          "Prism.Wpf": {
+            "target": "Package",
+            "version": "[7.1.0.431, )"
+          },
+          "Unity": {
+            "target": "Package",
+            "version": "[5.8.11, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

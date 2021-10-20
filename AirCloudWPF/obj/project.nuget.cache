@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "W9ia1Tid2ttHDxk0F9YfcqNyzZKmr+yIbSYKY0Z0PZZNIzeS/7HyEjIdzGMwvayTl4F6C/lnWKcTmHGISmXOZA==",
+  "success": true,
+  "projectFilePath": "E:\\dev release\\AirCloudWPF\\AirCloudWPF\\AirCloudWPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\isteyak.a\\.nuget\\packages\\commonservicelocator\\2.0.4\\commonservicelocator.2.0.4.nupkg.sha512",
+    "C:\\Users\\isteyak.a\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\isteyak.a\\.nuget\\packages\\prism.core\\7.1.0.431\\prism.core.7.1.0.431.nupkg.sha512",
+    "C:\\Users\\isteyak.a\\.nuget\\packages\\prism.wpf\\7.1.0.431\\prism.wpf.7.1.0.431.nupkg.sha512",
+    "C:\\Users\\isteyak.a\\.nuget\\packages\\unity\\5.8.11\\unity.5.8.11.nupkg.sha512"
+  ],
+  "logs": []
+}

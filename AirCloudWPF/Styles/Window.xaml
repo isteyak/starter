@@ -1,0 +1,441 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:AirCloudWPF">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/Brushes.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/Buttons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/PathFigures.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <ControlTemplate x:Key="AirCloudWindow" TargetType="{x:Type Window}">
+        <Border
+            x:Name="MainWindowBorder"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid x:Name="ParentContainer" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ContentControl
+                    x:Name="SideMenu"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Content="{Binding Path=(local:WindowExtensions.SideMenu), RelativeSource={RelativeSource TemplatedParent}}"
+                    Visibility="{Binding Path=(local:WindowExtensions.MenuVisibility), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    WindowChrome.IsHitTestVisibleInChrome="True" />
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Height="32"
+                    Background="#C3002F">
+                    <StackPanel
+                        Margin="{TemplateBinding local:WindowExtensions.BrandMargin}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Path
+                            Width="80"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Data="{Binding Path=(local:WindowExtensions.Brand), RelativeSource={RelativeSource TemplatedParent}}"
+                            Fill="White"
+                            Stretch="Uniform" />
+                        <Path
+                            Width="75"
+                            Margin="10,7.5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Data="{Binding Path=(local:WindowExtensions.Caption), RelativeSource={RelativeSource TemplatedParent}}"
+                            Fill="White"
+                            Stretch="Uniform" />
+                    </StackPanel>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="White"
+                        Text="{Binding Path=(local:WindowExtensions.ProjectName), RelativeSource={RelativeSource TemplatedParent}}" />
+
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <ContentControl
+                            x:Name="UserMenu"
+                            Margin="0,0,10,0"
+                            Content="{Binding Path=(local:WindowExtensions.UserMenu), RelativeSource={RelativeSource TemplatedParent}}"
+                            Visibility="{Binding Path=(local:WindowExtensions.MenuVisibility), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            WindowChrome.IsHitTestVisibleInChrome="True" />
+                        <Button
+                            Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                            Foreground="White"
+                            Style="{StaticResource MinimizeButtonStyle}"
+                            ToolTip="Minimize"
+                            WindowChrome.IsHitTestVisibleInChrome="True" />
+                        <Button
+                            x:Name="RestoreButton"
+                            Command="{x:Static SystemCommands.RestoreWindowCommand}"
+                            Foreground="White"
+                            Style="{StaticResource RestoreButtonStyle}"
+                            ToolTip="Restore"
+                            Visibility="Collapsed"
+                            WindowChrome.IsHitTestVisibleInChrome="True" />
+                        <Button
+                            x:Name="MaximizeButton"
+                            Command="{x:Static SystemCommands.MaximizeWindowCommand}"
+                            Foreground="White"
+                            Style="{StaticResource MaximizeButtonStyle}"
+                            ToolTip="Maximize"
+                            Visibility="Visible"
+                            WindowChrome.IsHitTestVisibleInChrome="True" />
+                        <Button
+                            Command="{x:Static SystemCommands.CloseWindowCommand}"
+                            Foreground="White"
+                            Style="{StaticResource CloseButtonStyle}"
+                            ToolTip="Close"
+                            WindowChrome.IsHitTestVisibleInChrome="True" />
+                    </StackPanel>
+                </Grid>
+
+                <ContentPresenter
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="WindowState" Value="Maximized">
+                <Setter TargetName="MainWindowBorder" Property="BorderThickness" Value="6" />
+                <Setter TargetName="RestoreButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="MaximizeButton" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+
+            <Trigger Property="WindowState" Value="Minimized">
+                <Setter TargetName="MainWindowBorder" Property="BorderThickness" Value="0" />
+                <Setter TargetName="RestoreButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="MaximizeButton" Property="Visibility" Value="Visible" />
+            </Trigger>
+
+            <Trigger Property="WindowState" Value="Normal">
+                <Setter TargetName="MainWindowBorder" Property="BorderThickness" Value="0" />
+                <Setter TargetName="RestoreButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="MaximizeButton" Property="Visibility" Value="Visible" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="AirCloudModal" TargetType="{x:Type local:AirCloudModal}">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                Height="5"
+                Background="{StaticResource ACPrimaryRedBrush}"
+                BorderBrush="Transparent"
+                BorderThickness="0" />
+            <Border
+                x:Name="MainBorder"
+                Grid.Row="1"
+                Padding="60,0,60,0"
+                Background="White"
+                BorderBrush="Transparent"
+                BorderThickness="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="Transparent">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MouseDownCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <TextBlock
+                            Margin="0,12,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource ACPrimaryGraphiteBrush}"
+                            Text="{TemplateBinding Title}" />
+                        <Button
+                            Width="14"
+                            Height="14"
+                            Margin="0,20,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource ACPrimaryGraphiteBrush}"
+                            Command="{Binding CloseCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                            Content="{StaticResource ACClose}"
+                            Cursor="Hand"
+                            Style="{StaticResource IconButtonStyle}" />
+                    </Grid>
+                    <ContentPresenter Grid.Row="1" Margin="0,16,0,0" />
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="AirCloudBox" TargetType="{x:Type local:AirCloudBox}">
+        <Border
+            x:Name="MainBorder"
+            MinHeight="198"
+            MaxWidth="508"
+            Padding="0,0,0,0"
+            Background="#FBFCFC"
+            BorderBrush="Transparent"
+            BorderThickness="0">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    x:Name="BoxBorder"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Height="5"
+                    Background="{StaticResource ACPrimaryRedBrush}"
+                    BorderBrush="Transparent"
+                    BorderThickness="0" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Path
+                        x:Name="Type"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Width="50"
+                        Height="50"
+                        Margin="24,12,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Data="{Binding Source={StaticResource ACSuccess}}"
+                        Fill="{StaticResource ACSystemSuccessBrush}"
+                        Stretch="Uniform" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="12,12,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Text="{TemplateBinding Title}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="12,8,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        FontSize="16"
+                        Text="{TemplateBinding Message}"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="24,8,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        FontSize="14"
+                        Text="{TemplateBinding Information}"
+                        TextWrapping="Wrap" />
+                </Grid>
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="Yes"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Primary"
+                        Content="Yes"
+                        Visibility="{TemplateBinding ShowYesNo,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Yes" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="Delete"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Primary"
+                        Content="Delete"
+                        Visibility="{TemplateBinding ShowDelete,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Delete" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="No"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Secondary"
+                        Content="No"
+                        Visibility="{TemplateBinding ShowYesNo,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="No" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="Save"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Primary"
+                        Content="Save"
+                        Visibility="{TemplateBinding ShowSave,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Save" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="DontSave"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Secondary"
+                        Content="Don't Save"
+                        Visibility="{TemplateBinding ShowDontSave,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="DontSave" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="Cancel"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Secondary"
+                        Content="Cancel"
+                        Visibility="{TemplateBinding ShowCancel,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Cancel" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="Ok"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Primary"
+                        Content="OK"
+                        Visibility="{TemplateBinding ShowOk,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Ok" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="Proceed"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Primary"
+                        Content="Proceed"
+                        Visibility="{TemplateBinding ShowProceed,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Proceed" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button
+                        x:Name="Later"
+                        Margin="10,0,0,0"
+                        local:ButtonExtensions.ButtonSize="Medium"
+                        local:ButtonExtensions.ButtonType="Secondary"
+                        Content="Later"
+                        Visibility="{TemplateBinding ShowLater,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedCommand}" CommandParameter="Later" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="MessageType" Value="Warning">
+                <Setter TargetName="Type" Property="Data" Value="{Binding Source={StaticResource ACWarning}}" />
+                <Setter TargetName="Type" Property="Fill" Value="{StaticResource ACSystemWarningBrush}" />
+            </Trigger>
+
+            <Trigger Property="MessageType" Value="Error">
+                <Setter TargetName="Type" Property="Data" Value="{Binding Source={StaticResource ACError}}" />
+                <Setter TargetName="Type" Property="Fill" Value="{StaticResource ACSystemDangerBrush}" />
+            </Trigger>
+
+            <Trigger Property="MessageType" Value="Success">
+                <Setter TargetName="Type" Property="Data" Value="{Binding Source={StaticResource ACSuccess}}" />
+                <Setter TargetName="Type" Property="Fill" Value="{StaticResource ACSystemSuccessBrush}" />
+            </Trigger>
+
+            <Trigger Property="MessageType" Value="Information">
+                <Setter TargetName="Type" Property="Data" Value="{Binding Source={StaticResource ACError}}" />
+                <Setter TargetName="Type" Property="Fill" Value="{StaticResource ACSystemInfoBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

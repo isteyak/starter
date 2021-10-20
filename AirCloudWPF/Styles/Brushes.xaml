@@ -1,0 +1,36 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AirCloudWPF">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/AirCloudWPF;component/Styles/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <SolidColorBrush x:Key="ACSystemDangerBrush" Color="{StaticResource ACSystemDanger}" />
+    <SolidColorBrush x:Key="ACSystemDangerBrush1" Color="{StaticResource ACSystemDanger1}" />
+    <SolidColorBrush x:Key="ACSystemWarningBrush" Color="{StaticResource ACSystemWarning}" />
+    <SolidColorBrush x:Key="ACSystemWarningBrush1" Color="{StaticResource ACSystemWarning1}" />
+    <SolidColorBrush x:Key="ACSystemInfoBrush" Color="{StaticResource ACSystemInfo}" />
+    <SolidColorBrush x:Key="ACSystemInfoBrush1" Color="{StaticResource ACSystemInfo1}" />
+    <SolidColorBrush x:Key="ACSystemSuccessBrush" Color="{StaticResource ACSystemSuccess}" />
+    <SolidColorBrush x:Key="ACSystemSuccessBrush1" Color="{StaticResource ACSystemSuccess1}" />
+
+    <SolidColorBrush x:Key="ACPrimaryRedBrush" Color="{StaticResource ACPrimaryRed}" />
+    <SolidColorBrush x:Key="ACPrimaryGraphiteBrush" Color="{StaticResource ACPrimaryGraphite}" />
+    <SolidColorBrush x:Key="ACPrimaryGraphiteDarkBrush" Color="{StaticResource ACPrimaryGraphiteDark}" />
+    <SolidColorBrush x:Key="ACPrimaryGraphiteLightBrush" Color="{StaticResource ACPrimaryGraphiteLight5}" />
+    <SolidColorBrush x:Key="ACPrimaryGrayBrush" Color="{StaticResource ACGray1}" />
+    <SolidColorBrush x:Key="ACSecondaryGrayBrush" Color="{StaticResource ACGray2}" />
+    <SolidColorBrush x:Key="ACGrayBrush3" Color="{StaticResource ACGray3}" />
+    <SolidColorBrush x:Key="ACGrayBrush4" Color="{StaticResource ACGray4}" />
+    <SolidColorBrush x:Key="ACGrayBrush5" Color="{StaticResource ACGray5}" />
+    <SolidColorBrush x:Key="ACGrayBrush6" Color="{StaticResource ACGray6}" />
+    <SolidColorBrush x:Key="ACPrimaryGraphiteLightBrush2" Color="{StaticResource ACPrimaryGraphiteLight2}" />
+
+    <SolidColorBrush x:Key="ACPrimaryBlackTextBrush" Color="{StaticResource ACPrimaryBlackText}" />
+    <SolidColorBrush x:Key="ACPrimaryGreyTextBrush" Color="{StaticResource ACPrimaryGreyText}" />
+    <SolidColorBrush x:Key="ACPrimaryRedTextBrush" Color="{StaticResource ACPrimaryRedText}" />
+    <SolidColorBrush x:Key="ACTernaryRedBrush" Color="{StaticResource ACTernaryRed}" />
+    <SolidColorBrush x:Key="ACPrimaryRedLightBrush5" Color="{StaticResource ACPrimaryRedLight5}" />
+
+
+</ResourceDictionary>
